@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+
+{% block title %}Applicant List{% endblock %}
+
+{% block content %}
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="mb-3 fw-bold">Applicant Management</h1>
+            <div class="position-badge">
+                <i class="bi bi-briefcase me-2"></i>Position: {{ position }}
+            </div>
+        </div>
+
+        <div class="d-flex">
+            <div class="stat-card me-3">
+                <div class="number">{{ applicants.count }}</div>
+                <div class="label">Applicants</div>
+            </div>
+            <div class="stat-card">
+                <div class="number">{{ projects_count }}</div>
+                <div class="label">Projects</div>
+            </div>
+        </div>
+    </div>
+
+    {% if applicants %}
+        <div class="card">
+            <div class="card-header bg-white d-flex justify-content-between align-items-center py-3">
+                <h2 class="h5 mb-0">Applicant List</h2>
+                <div class="d-flex">
+                    <input type="text" class="form-control me-2" placeholder="Search applicants...">
+                    <button class="btn btn-outline-primary">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead>
+                            <tr>
+                                <th>Applicant</th>
+                                <th>Contact</th>
+                                <th>Portfolio</th>
+                                <th class="text-center">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for applicant in applicants %}
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <div class="bg-light rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px;">
+                                                <i class="bi bi-person text-primary"></i>
+                                            </div>
+                                            <div>
+                                                <div class="fw-medium">{{ applicant.first_name }} {{ applicant.last_name }}</div>
+                                                <small class="text-muted">@{{ applicant.username }}</small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div>{{ applicant.email }}</div>
+                                        <small class="text-muted">
+                                            <i class="bi bi-telephone me-1"></i>Phone: N/A
+                                        </small>
+                                    </td>
+                                    <td>
+                                        {% if applicant.portfolio %}
+                                            <span class="badge bg-success">Available</span>
+                                        {% else %}
+                                            <span class="badge bg-secondary">Not available</span>
+                                        {% endif %}
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="d-flex justify-content-center">
+                                            <a href="{% url 'applicant_detail' username=applicant.username %}"
+                                               class="btn btn-sm btn-outline-primary me-2 d-flex align-items-center"
+                                               title="View Portfolio">
+                                                <i class="bi bi-eye me-1"></i> View
+                                            </a>
+                                            <a href="{% url 'applicant_delete' username=applicant.username %}"
+                                               class="btn btn-sm btn-outline-danger d-flex align-items-center"
+                                               title="Delete Applicant">
+                                                <i class="bi bi-trash me-1"></i> Delete
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card-footer bg-white py-3">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="text-muted">Showing {{ applicants.count }} of {{ applicants.count }} applicants</div>
+                    <nav>
+                        <ul class="pagination mb-0">
+                            <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <div class="card">
+            <div class="card-body text-center py-5">
+                <div class="mb-4">
+                    <i class="bi bi-people display-1 text-muted"></i>
+                </div>
+                <h3 class="mb-3">No Applicants Found</h3>
+                <p class="text-muted mb-4">
+                    There are currently no applicants for the <strong>{{ position }}</strong> position.
+                </p>
+                <div class="d-flex justify-content-center">
+                    <a href="{% url 'admin:index' %}" class="btn btn-primary me-2">
+                        <i class="bi bi-person-plus me-1"></i> Add Applicants
+                    </a>
+                    <a href="#" class="btn btn-outline-secondary">
+                        <i class="bi bi-question-circle me-1"></i> Help
+                    </a>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,48 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.pyc
+*.pyd
+*.pyo
+*.egg-info/
+.eggs/
+
+# Distribution / packaging
+.Python
+build/
+dist/
+develop-eggs/
+parts/
+sdist/
+var/
+wheels/
+*.egg
+
+# Installer logs
+*.log
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Environments
+.env
+.venv/
+venv/
+env/
+
+# Database
+*.sqlite3
+/db.sqlite3
+
+# Media files
+/media/
+
+# Static files (if collected into STATIC_ROOT)
+/staticfiles/
+
+# IDE specific files (PyCharm)
+.idea/
+*.iml
+
+# Local settings
+local_settings.py
