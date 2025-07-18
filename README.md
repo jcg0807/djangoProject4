@@ -1,97 +1,109 @@
-# Job Applicant Dashboard
+# Junior Developer Applicant Portal
 
-This is a Django web application designed to serve as a Job Applicant Dashboard specifically for the "Junior Developer" position. It allows you to manage applicant information, portfolios, and projects through the Django Admin interface and provides a user-friendly dashboard for viewing and managing applicants.
+This Django application serves as a management system for tracking candidates applying for Junior Developer positions. The platform enables administrators to organize applicant portfolios and associated projects through an intuitive interface.
 
-## Features
+## Key Functionality
 
-* **Applicant Listing:** A table displaying basic information (first name, last name, email) of Junior Developer applicants.
-* **Detailed Portfolio View:** A dedicated page to view an applicant's full portfolio and associated project details.
-* **Applicant Management:**
-    * **Go:** Redirects to the detailed portfolio page.
-    * **Delete:** Deletes an applicant and their associated portfolio and project from the database.
-* **Django Admin Integration:** All data (Users, Portfolios, Projects) can be managed and created directly within the Django Admin.
-* **Static CDN for Bootstrap:** Bootstrap is served as a static file from your project.
-* **Django Template Tags:** Utilizes `{% extends %}`, `{% include %}`, `{% url %}` for efficient templating.
+* **Candidate Overview:** Displays applicant details including names and contact information in a structured table format
+* **Portfolio Inspection:** Provides comprehensive views of each candidate's work samples and project history
+* **Candidate Administration:**
+    * **View:** Access complete portfolio details
+    * **Remove:** Delete applicant records along with related materials
+* **Administration Panel:** Full control over user accounts, portfolios, and projects through Django's built-in admin
+* **Local Bootstrap:** Bootstrap framework hosted within the project files
+* **Template Organization:** Efficient template structure using Django's template system
 
-## Project Structure
-
+## Directory Layout
 djangoProject4/
-├── djangoProject4/          # Main Django project settings
-├── portfolio/              # Django app for portfolio and applicant management
-├── static/                 # Static files (e.g., Bootstrap CSS)
-├── templates/              # HTML templates for the application
-├── manage.py               # Django's command-line utility
-├── README.md               # This file
-└── .gitignore              # Git ignore file
+├── djangoProject4/ # Core configuration files
+├── portfolio/ # Application components
+├── static/ # CSS and JavaScript assets
+├── templates/ # Interface templates
+├── manage.py # Project control script
+├── README.md # Documentation
+└── .gitignore # Version control exclusions
 
-## Getting Started
+## Setup Instructions
 
-### Prerequisites
+### Requirements
 
-* Python 3.8+
-* pip (Python package installer)
+* Python 3.8 or newer
+* pip package manager
 
-### 1. Clone the Repository
+### 1. Obtain Project Files
 
 ```bash
 git clone https://github.com/jcg0807/djangoProject4.git
 cd djangoProject4
-
-2. Create and Activate a Virtual Environment
-bash
-
+```
+2. Configure Virtual Environment
+```bash
 python -m venv venv
 
-# On macOS/Linux:
+# macOS/Linux activation:
 source venv/bin/activate
 
-# On Windows:
+# Windows activation:
 venv\Scripts\activate
-
-3. Install Dependencies
-bash
-
+```
+3. Install Required Packages
+ ```bash
 pip install Django
+```
+4. Set Up Bootstrap
 
-4. Download Bootstrap
+    Download Bootstrap CSS from the official site
 
-Download the compiled CSS for Bootstrap (bootstrap.min.css) from getbootstrap.com and place it in:
-text
-
+    Place the file at:
 djangoProject4/portfolio/static/css/bootstrap.min.css
 
-5. Run Database Migrations
-bash
-
+5. Prepare Database
+```bash
 python manage.py makemigrations portfolio
 python manage.py migrate
-
-6. Create a Superuser
-bash
-
+```
+6. Create Administrator Account
+```bash
 python manage.py createsuperuser
-
-7. Run the Development Server
-bash
-
+```
+7. Launch Application
+```bash
 python manage.py runserver
+```
+Access the system at: http://127.0.0.1:8000/
+How to Use
+Administration Console
 
-Access the application at: http://127.0.0.1:8000/
-Usage
-Django Admin
+    Navigate to http://127.0.0.1:8000/admin/
 
-    Access: http://127.0.0.1:8000/admin/
+    Manage:
 
-    Create:
+        User accounts
 
-        Users (under Authentication and Authorization)
+        Development projects
 
-        Projects (under Portfolio)
+        Candidate portfolios
 
-        Portfolios (link Users to Projects)
+Applicant Interface
 
-Applicant Dashboard
+    Main dashboard: http://127.0.0.1:8000/
 
-    Main view: http://127.0.0.1:8000/
+    Individual portfolios: http://127.0.0.1:8000/portfolio/[username]/
 
-    Portfolio detail: http://127.0.0.1:8000/portfolio/<username>/
+System Architecture
+
+    Data Models:
+
+        Portfolio (Direct association with User)
+
+        Project (Flexible relationship with Portfolios)
+
+    View Components:
+
+        Listing view (Functional approach)
+
+        Detailed view (Class-based)
+
+        Removal view (Class-based)
+
+    Address Routing: Utilizes usernames in paths (/portfolio/[username]/)
